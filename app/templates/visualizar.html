@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visualizar Itens</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+
+    <script>
+        // Função para excluir um item
+        function deleteItem(itemId) {
+            if (confirm("Tem certeza de que deseja excluir este item?")) {
+                fetch(`/excluir/${itemId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    document.getElementById(`item-row-${itemId}`).remove();
+                })
+                .catch(error => console.error('Erro ao excluir o item:', error));
+            }
+        }
+
+        // Função para editar um item
+        function editItem(itemId) {
+            const nome = prompt("Digite o novo nome:");
+            const descricao = prompt("Digite a nova descrição:");
+            const preco = prompt("Digite o novo preço:");
+            const quantidade = prompt("Digite a nova quantidade:");
+            
+            if (nome && descricao && preco && quantidade) {
+                fetch(`/editar/${itemId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nome: nome, descricao: descricao, preco: preco, quantidade: quantidade })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                    document.getElementById(`nome-${itemId}`).textContent = nome;
+                    document.getElementById(`descricao-${itemId}`).textContent = descricao;
+                    document.getElementById(`preco-${itemId}`).textContent = preco;
+                    document.getElementById(`quantidade-${itemId}`).textContent = quantidade;
+                })
+                .catch(error => console.error('Erro ao editar o item:', error));
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Visualizar Itens</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in itens %}
+            <tr id="item-row-{{ item.id }}">
+                <td>{{ item.id }}</td>
+                <td id="nome-{{ item.id }}">{{ item.nome }}</td>
+                <td id="descricao-{{ item.id }}">{{ item.descricao }}</td>
+                <td id="preco-{{ item.id }}">{{ item.preco }}</td>
+                <td id="quantidade-{{ item.id }}">{{ item.quantidade }}</td>
+                <td>
+                    <button onclick="editItem({{ item.id }})">Editar</button>
+                    <button onclick="deleteItem({{ item.id }})">Excluir</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

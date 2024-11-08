@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Item</h2>
+        <form action="{{ url_for('editar', id=item.id) }}" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ item.nome }}" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao">{{ item.descricao }}</textarea>
+
+            <label for="preco">Preço:</label>
+            <input type="number" step="0.01" id="preco" name="preco" value="{{ item.preco }}" required>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" value="{{ item.quantidade }}" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+<!-- app/templates/editar.html -->
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Item</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Editar Item</h2>
+        <form action="{{ url_for('editar', id=item.id) }}" method="post">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" value="{{ item.nome }}" required>
+
+            <label for="descricao">Descrição:</label>
+            <textarea id="descricao" name="descricao">{{ item.descricao }}</textarea>
+
+            <label for="preco">Preço:</label>
+            <input type="number" step="0.01" id="preco" name="preco" value="{{ item.preco }}" required>
+
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" value="{{ item.quantidade }}" required>
+
+            <button type="submit">Salvar Alterações</button>
+        </form>
+        
+        <p><a href="{{ url_for('visualizar') }}" class="back-button">Cancelar</a></p>
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Item</title>
+</head>
+<body>
+    <h1>Editar Item</h1>
+    <form action="{{ url_for('editar', id=item.id) }}" method="post">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="{{ item.nome }}" required>
+
+        <label for="descricao">Descrição:</label>
+        <input type="text" name="descricao" value="{{ item.descricao }}" required>
+
+        <label for="preco">Preço:</label>
+        <input type="number" name="preco" value="{{ item.preco }}" required>
+
+        <label for="quantidade">Quantidade:</label>
+        <input type="number" name="quantidade" value="{{ item.quantidade }}" required>
+
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html> -->
+
+
+
+
+
+
+
+<!-- AJUSTE DE CÓDIGO-->
+<!--Inicialmente o projeto estava assim-->
+
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Registros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Visualizar Registros</h2>
+
+        <div class="grid">
+            <div class="grid-header">Nome do Item</div>
+            <div class="grid-header">Descrição</div>
+            <div class="grid-header">Preço</div>
+            <div class="grid-header">Quantidade</div>
+            <div class="grid-header">Ações</div>
+
+            {% for item in itens %}
+            <div class="grid-item">{{ item.nome }}</div>
+            <div class="grid-item">{{ item.descricao }}</div>
+            <div class="grid-item">R$ {{ item.preco }}</div>
+            <div class="grid-item">{{ item.quantidade }}</div>
+            <div class="grid-item">
+                <a href="{{ url_for('editar', id=item.id) }}" class="btn edit">Editar</a>
+                 Formulário para exclusão 
+                <form action="{{ url_for('excluir', id=item.id) }}" method="post" style="display:inline;">
+                    <button type="submit" class="btn delete">Excluir</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        
+         Botão de retorno 
+        <p><a href="{{ url_for('cadastro') }}" class="back-button">Voltar ao Cadastro</a></p>
+    </div>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+<!--Com a caixa de diálogo ficou dessa maneira-->
+
+<!-- <!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visualizar Registros</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles2.css') }}">
+    <script>
+
+        function confirmarExclusao(event) {
+            if (!confirm("Tem certeza de que deseja excluir este registro permanentemente?")) {
+                event.preventDefault();
+            }
+        }
+
+        function confirmarEdicao(event) {
+            if (!confirm("Você está prestes a editar este registro. Deseja continuar?")) {
+                event.preventDefault();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Visualizar Registros</h2>
+
+        <div class="grid">
+            <div class="grid-header">Nome do Item</div>
+            <div class="grid-header">Descrição</div>
+            <div class="grid-header">Preço</div>
+            <div class="grid-header">Quantidade</div>
+            <div class="grid-header">Ações</div>
+
+            {% for item in itens %}
+            <div class="grid-item">{{ item.nome }}</div>
+            <div class="grid-item">{{ item.descricao }}</div>
+            <div class="grid-item">R$ {{ item.preco }}</div>
+            <div class="grid-item">{{ item.quantidade }}</div>
+            <div class="grid-item">
+                <a href="{{ url_for('editar', id=item.id) }}" class="btn edit" onclick="confirmarEdicao(event)">Editar</a>
+                
+                <form action="{{ url_for('excluir', id=item.id) }}" method="post" style="display:inline;" onsubmit="confirmarExclusao(event)">
+                    <button type="submit" class="btn delete">Excluir</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <p><a href="{{ url_for('cadastro') }}" class="back-button">Voltar ao Cadastro</a></p>
+    </div>
+</body>
+</html> -->
