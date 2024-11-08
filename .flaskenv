@@ -1,0 +1,2 @@
+FLASK_APP=2bim.py
+FLASK_ENV=development
