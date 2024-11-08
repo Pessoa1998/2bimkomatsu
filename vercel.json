@@ -1,9 +1,16 @@
 {
-
-    "rewrites": [
-
-        { "source": "/(.*)", "destination": "/api/app" }
-
+    "version": 2,
+    "builds": [
+      {
+        "src": "2bim.py",
+        "use": "@vercel/python"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "2bim.py"
+      }
     ]
-
-}
+  }
+  
