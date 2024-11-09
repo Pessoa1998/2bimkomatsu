@@ -1,16 +1,15 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "2bim.py",
-        "use": "@vercel/python"
-      }
-    ],
-    "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "2bim.py"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/2bim.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "api/2bim.py"
+    }
+  ]
+}
